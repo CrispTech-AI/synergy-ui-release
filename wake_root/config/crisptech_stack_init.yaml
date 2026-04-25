@@ -1,16 +1,16 @@
 version: '3.8'
 
 services:
-  open-webui:
+  synergy-ui:
     container_name: synergy-ui
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/crisptech/synergy-ui:main
     restart: unless-stopped
     ports:
       - "3000:8080"
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
     volumes:
-      - webui_data:/app/backend/data
+      - synergy_ui_data:/app/backend/data
 
   ollama:
     container_name: ollama
@@ -88,7 +88,7 @@ services:
       - caddy_config:/config
 
 volumes:
-  webui_data:
+  synergy_ui_data:
   ollama_data:
   n8n_data:
   flowise_data:
