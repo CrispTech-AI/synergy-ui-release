@@ -22,6 +22,13 @@ fi
 
 PORT="${PORT:-8080}"
 HOST="${HOST:-0.0.0.0}"
+
+# Default local CORS origins for frontend development to support localhost:5173
+# and backend API calls from the dev frontend when credentials are included.
+if [ -z "$CORS_ALLOW_ORIGIN" ]; then
+  export CORS_ALLOW_ORIGIN="http://localhost:5173;http://localhost:8080"
+fi
+
 if test "$WEBUI_SECRET_KEY $WEBUI_JWT_SECRET_KEY" = " "; then
   echo "Loading WEBUI_SECRET_KEY from file, not provided as an environment variable."
 

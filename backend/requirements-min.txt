@@ -48,4 +48,7 @@ fake-useragent==2.2.0
 chromadb==1.3.7
 black==25.12.0
 pydub
+audioop-lts
+openai-whisper
 chardet==5.2.0
+duckduckgo-search

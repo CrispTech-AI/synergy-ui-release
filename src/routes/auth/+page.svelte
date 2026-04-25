@@ -129,6 +129,12 @@
 	};
 
 	let onboarding = false;
+	let onboardingInitialized = false;
+
+	$: if ($config && !onboardingInitialized) {
+		onboarding = $config.onboarding ?? false;
+		onboardingInitialized = true;
+	}
 
 	async function setLogoImage() {
 		await tick();
