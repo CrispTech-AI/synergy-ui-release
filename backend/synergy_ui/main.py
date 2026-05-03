@@ -1,3 +1,16 @@
+# Install pyaudioop shim for Python 3.13+ compatibility BEFORE any other imports
+import sys
+
+class AudioopModule:
+    """Minimal mock of audioop module for Python 3.13+"""
+    def __getattr__(self, name):
+        def dummy(*args, **kwargs):
+            pass
+        return dummy
+
+sys.modules['pyaudioop'] = AudioopModule()
+sys.modules['audioop'] = AudioopModule()
+
 import asyncio
 import inspect
 import json
@@ -5,7 +18,6 @@ import logging
 import mimetypes
 import os
 import shutil
-import sys
 import time
 import random
 import re

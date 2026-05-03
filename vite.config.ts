@@ -2,6 +2,8 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
+import fs from 'fs';
+import os from 'os';
 
 export default defineConfig({
   plugins: [
@@ -40,6 +42,15 @@ export default defineConfig({
     port: 5173,
     fs: {
       strict: false
+    },
+    https: {
+      key: fs.readFileSync(path.resolve(os.homedir(), '.synergy-certs/localhost.key')),
+      cert: fs.readFileSync(path.resolve(os.homedir(), '.synergy-certs/localhost.crt'))
+    },
+    hmr: {
+      host: 'localhost',
+      port: 5173,
+      protocol: 'wss'
     }
   },
   optimizeDeps: {

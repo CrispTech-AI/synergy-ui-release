@@ -69,7 +69,13 @@ if [ -n "$SPACE_ID" ]; then
   export WEBUI_URL=${SPACE_HOST}
 fi
 
-if [ -f "$SCRIPT_DIR/venv/bin/python" ]; then
+if [ -f "$SCRIPT_DIR/../.venv/bin/python" ]; then
+    PYTHON_CMD="$SCRIPT_DIR/../.venv/bin/python"
+    echo "Using virtual environment: $PYTHON_CMD"
+elif [ -f "$SCRIPT_DIR/.venv/bin/python" ]; then
+    PYTHON_CMD="$SCRIPT_DIR/.venv/bin/python"
+    echo "Using virtual environment: $PYTHON_CMD"
+elif [ -f "$SCRIPT_DIR/venv/bin/python" ]; then
     PYTHON_CMD="$SCRIPT_DIR/venv/bin/python"
     echo "Using virtual environment: $PYTHON_CMD"
 else
@@ -86,7 +92,7 @@ else
 fi
 
 # Run uvicorn
-WEBUI_SECRET_KEY="$WEBUI_SECRET_KEY" exec "$PYTHON_CMD" -m uvicorn synergy_ui.main:app \
+WEBUI_SECRET_KEY="$WEBUI_SECRET_KEY" PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/../.venv/lib/python3.13/site-packages" exec "$PYTHON_CMD" -m uvicorn synergy_ui.main:app \
     --host "$HOST" \
     --port "$PORT" \
     --forwarded-allow-ips '*' \
