@@ -1,5 +1,5 @@
 # CrispTech AI Stack - Local Version
-# Includes: Synergy UI x2, LocalAI, OpenWebUI, AnythingLLM, Gradio, Streamlit, and system tools
+# Includes: Synergy UI x2, LocalAI, AnythingLLM, Gradio, Streamlit, and system tools
 
 version: '3.8'
 
@@ -38,15 +38,17 @@ services:
       - ./data/localai:/data
     restart: always
 
-  # --- Open WebUI (Stock) ---
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
-    ports:
-      - "3003:3000"
-    volumes:
-      - ./data/open-webui:/app/data
-    restart: always
+  # --- Open WebUI (Stock) - Archived Reference ---
+  # This service has been replaced by Synergy UI (see synergy-ui-prod and synergy-ui-dev above)
+  # Keeping this reference for documentation purposes only
+  # open-webui:
+  #   image: ghcr.io/open-webui/open-webui:main
+  #   container_name: open-webui
+  #   ports:
+  #     - "3003:3000"
+  #   volumes:
+  #     - ./data/open-webui:/app/data
+  #   restart: always
 
   # --- AnythingLLM ---
   anything-llm:
